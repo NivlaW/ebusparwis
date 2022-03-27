@@ -64,44 +64,48 @@
                 </div>
             </div>
         </div>
-        <div class="flt shadow-lg bg-white">
-            <div class="py-5 px-5 d-flex">
-                <div class="select me-3">
-                    <label>Tipe Room</label>
-                    <select class="jnsbs" id="jns" aria-label="Default select example"
-                        onchange="location = this.value">
-                        <option value="" disabled selected hidden>-Pilih Tipe-</option>
-                        @foreach ($jenis as $item)
-                            <option value="/tipe/{{ $item->id }}">{{ $item->nama }}</option>
-                        @endforeach
-                    </select>
+        <form action="kamar" method="GET">
+            @csrf
+            <div class="flt shadow-lg bg-white">
+                <div class="py-5 px-5 d-flex">
+                    <div class="select me-3">
+                        <label>Tipe Room</label>
+                        <select class="jnsbs" id="jns" aria-label="Default select example"
+                            onchange="location = this.value">
+                            <option value="" disabled selected hidden>-Pilih Tipe-</option>
+                            @foreach ($jenis as $item)
+                                <option @if ($item->id == $id) value="{{ $item->id }}"  selected @endif
+                                    value="/tipe/{{ $item->id }}">{{ $item->nama }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="select me-3">
+                        <label>Amount Bed</label>
+                        <select class="jnsbs" id="jns" aria-label="Default select example">
+                            <option value="1">-Amount Bed-</option>
+                            <option value="1">Single Bed</option>
+                            <option value="2">Double Bed</option>
+                            <option value="3">Twin Bed</option>
+                        </select>
+                    </div>
+                    <div class="select me-3">
+                        <label>Mulai</label>
+                        <input type="date" class="tgl" required id="floatingInput" placeholder="mulai"
+                            name="mulai">
+                    </div>
+                    <div class="select me-3">
+                        <label>Selesai</label>
+                        <input type="date" class="tgl" required id="floatingInput" placeholder="Selesai"
+                            name="selesai">
+                    </div>
                 </div>
-                <div class="select me-3">
-                    <label>Amount Bed</label>
-                    <select class="jnsbs" id="jns" aria-label="Default select example">
-                        <option value="" disabled selected hidden>-Amount Bed-</option>
-                        <option value="1">Single Bed</option>
-                        <option value="2">Double Bed</option>
-                        <option value="3">Twin Bed</option>
-                    </select>
-                </div>
-                <div class="select me-3">
-                    <label>Mulai</label>
-                    <input type="date" class="tgl" required id="floatingInput" placeholder="mulai"
-                        name="mulai">
-                </div>
-                <div class="select me-3">
-                    <label>Selesai</label>
-                    <input type="date" class="tgl" required id="floatingInput" placeholder="Selesai"
-                        name="selesai">
-                </div>
+                <a href="#listbus" class="slnjt shadow-lg">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
             </div>
-            <a href="#listbus" class="slnjt shadow-lg">
-                <i class="fa-solid fa-arrow-right"></i>
-            </a>
-        </div>
-        <div class="lstbs" id="listbus">
-            {{-- <div class="d-flex justify-content-center align-center">
+            <div class="lstbs" id="listbus">
+                <div class="d-flex justify-content-center align-center">
                     <h1>Explore More Room</h1>
                 </div>
                 <div class="row mt-4">
@@ -138,14 +142,15 @@
                         <button type="submit" class="m-2 btn-lg btn btn-primary">Pesan</button>
                     </div>
                 </div>
-            </div> --}}
-            <div class="lstfsl" id="listfasilitas">
-                <div class="d-flex justify-content-center align-center">
-                    <h1>Fasilitas</h1>
-                </div>
-
             </div>
+        </form>
+        <div class="lstfsl" id="listfasilitas">
+            <div class="d-flex justify-content-center align-center">
+                <h1>Fasilitas</h1>
+            </div>
+
         </div>
+    </div>
 </body>
 
 </html>

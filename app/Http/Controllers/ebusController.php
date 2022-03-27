@@ -137,4 +137,11 @@ class ebusController extends Controller
         ebus::destroy($id);
         return redirect('/admin/dashboard')->with('status', 'Data Berhasil Dihapus');
     }
+    public function tipekamar($id)
+    {
+        $jenis = jenis::all();
+        $ebus = ebus::where('id_jenis', $id)->get();
+
+        return view('tipe', compact('ebus','jenis','id'));
+    }
 }

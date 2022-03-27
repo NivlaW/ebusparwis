@@ -98,6 +98,7 @@
                             <th scope="col">Tipe Bed</th>
                             <th scope="col">Check in</th>
                             <th scope="col">Check Out</th>
+                            <th scope="col">Harga</th>
                             <th scope="col">Status</th>
                             <th scope="col" class="d-print-none">Opsi</th>
                         </tr>
@@ -111,17 +112,21 @@
                                 <td>{{ $item->ebus->bed }}</td>
                                 <td>{{ $item->mulai }}</td>
                                 <td>{{ $item->selesai }}</td>
-                                <td>
-                                    <select name="" id="" disabled="disabled"></select>    
-                                </td>
-                                <td class="d-print-none d-flex justify-content-center">
-                                    <form action="/admin/list-tipe/{{ $item->id }}" method="POST">
+                                <td>Rp {{ $item->ebus->harga }}</td>
+                                <td>{{ $item->status }}</td>
+                                <td class="d-print-none">
+                                    <form action="/resepsionis/client" method="POST">
                                         @csrf
-                                        @method('delete')
-                                        <button class="btn btn-sm btn-danger">Hapus</button>
+                                        <select onchange="this.form.submit()" name="status">
+                                            <option value="" disabled selected hidden>-Pilih Status-</option>
+                                            <option value="diproses">diproses</option>
+                                            <option value="dipesan">dipesan</option>
+                                            <option value="dibatalkan">dibatalkan</option>
+                                            <option value="selesai">selesai</option>
+                                        </select>
+                                        <input type="hidden" name="id_kamar" value="{{ $item->ebus->id }}">
+                                        <input type="hidden" name="id" value="{{ $item->id }}">
                                     </form>
-                                    <a href="/admin/list-tipe/edit/{{ $item->id }}"
-                                        class="ms-2 btn btn-sm btn-primary">Edit</a>
                                 </td>
                             </tr>
                         @endforeach
